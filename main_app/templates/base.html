@@ -1,0 +1,34 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="{% static 'styles/main.css' %}" />
+    <link rel="stylesheet" href="https://use.typekit.net/hdr2oks.css">
+    <script src="{% static 'scripts/main.js' %}" defer></script>
+    <title>Golfhub - {% block title %}{% endblock %}</title> 
+  </head>
+  <body >
+        <nav role="navigation">
+            {% if user.is_authenticated %}
+            <div>
+                <a href="{% url 'logout' %}">Logout</a>
+            </div>
+            {% else %}
+            <div>
+                <a href="{% url 'login' %}">Log In</a>
+                <a  href="{% url 'signup' %}">Sign Up</a>
+            </div>
+            {% endif %}
+        </nav>
+        
+
+          {% block content %}{% endblock %}
+
+        
+      </div>
+    </div>
+  </body>
+</html>
