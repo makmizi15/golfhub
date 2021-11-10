@@ -1,0 +1,41 @@
+@import url('satoshi.css');
+
+:root {
+    --body-bg: #151819;
+    --dark-blue-100: #1D1F23;
+    --dark-blue-80: #25272C;
+    --dark-blue-60: #2C2F35;
+    --brand-color: #60AA5F;
+    --brand-color-light: #99CA98;
+    --secondary-blue: #4946D8;
+    --secondary-yellow: #FFE600;
+    --err-red: #D84646;
+    --white: white;
+    --white-60: #E3E3E3;
+
+
+}
+
+*, ::before, ::after {
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--body-bg);
+    font-size: 15px;
+    font-family: 'Satoshi-Variable', sans-serif;
+    font-weight: 400;
+    font-variation-settings: 'wght' 450;
+    color: var(--white);
+}
+
+.logo {
+    font-family: degular,sans-serif;
+    font-weight: 700;
+    font-style: normal;
+    color: var(--white);
+}
+
+.logo span {
+    color: var(--brand-color);
+}
