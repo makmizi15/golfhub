@@ -27,3 +27,9 @@ class Signup(View):
 # @method_decorator(login_required, name='dispatch')
 class Home(TemplateView):
     template_name = "home.html"
+
+class Profile(TemplateView):
+    template_name = "profile.html"
+
+class Groups(TemplateView):
+    template_name = "groups.html"
