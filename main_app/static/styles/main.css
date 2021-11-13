@@ -96,9 +96,10 @@ button {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 32px 0;
+    padding: 24px 0;
     width: 100%;
 }
+
 
 .nav__vert {
     display: flex;
@@ -122,6 +123,18 @@ button {
     margin-bottom: 24px;
     transition: background-color 300ms ease-out;
     cursor: pointer;
+}
+
+.nav__link.is--hori {
+    width: 42px;
+    height: 42px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 12px;
+    margin-bottom: 0px;
+    background-color: var(--dark-blue-100);
+    border-radius: 999px;
 }
 
 .nav__link.is--bottom {
@@ -164,6 +177,40 @@ button {
     height: auto;
 } */
 
+.nav__search {
+    display: flex;
+    justify-content: stretch;
+    align-items: center;
+    background-color: var(--dark-blue-100);
+    padding: 0 6px;
+    border-radius: 999px;
+    height: 42px;
+
+}
+
+.search__icon-wrap {
+    width: 32px;
+    height: 32px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--dark-blue-80);
+    border-radius: 999px;
+    margin-right: 8px;
+}
+
+.search__icon-wrap:hover {
+    background-color: var(--brand-color);
+    cursor: pointer;
+}
+
+.search__input {
+    background-color: transparent;
+    color: var(--white-60);
+    outline: none;
+    border: none;
+}
+
 .nav__register-btn {
     padding: 12px 0;
     width: 96px;
@@ -191,4 +238,12 @@ button {
 
 .logo span {
     color: var(--brand-color);
+}
+
+.flex-row {
+    display: flex;
+}
+
+.flex-row.justify-end {
+    justify-content: flex-end;
 }
