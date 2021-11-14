@@ -15,9 +15,18 @@
       <div class="container__master">
         <nav class="nav__hori" role="navigation" aria-label="horizontal">
           <a class="logo" href="{% url 'home' %}"><span>GOLF</span>HUB</a>
-          <div>
+          <div class="flex-row justify-end">
             {% if user.is_authenticated %}
-                <a href="{% url 'logout' %}"><button class="nav__register-btn">Logout</button></a>
+                <div class="nav__search">
+                  <input class="search__btn is-success" style="display: none" type="submit" value="" />
+                  <div class="search__icon-wrap">
+                    <svg width="13" height="14" viewBox="0 0 13 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path fill-rule="evenodd" clip-rule="evenodd" d="M7.42857 4.78582C7.42857 6.28488 6.21334 7.5001 4.71429 7.5001C3.21523 7.5001 2 6.28488 2 4.78582C2 3.28676 3.21523 2.07153 4.71429 2.07153C6.21334 2.07153 7.42857 3.28676 7.42857 4.78582ZM6.71353 9.05642C6.10657 9.34106 5.429 9.5001 4.71429 9.5001C2.11066 9.5001 0 7.38945 0 4.78582C0 2.18219 2.11066 0.0715332 4.71429 0.0715332C7.31791 0.0715332 9.42857 2.18219 9.42857 4.78582C9.42857 5.94582 9.00961 7.00797 8.31474 7.8292L11.85 11.3644C12.2405 11.755 12.2405 12.3881 11.85 12.7786C11.4594 13.1692 10.8263 13.1692 10.4358 12.7786L6.71353 9.05642Z" fill="white"/>
+                    </svg>
+                  </div>
+                  <input class="search__input" type="text" name="name" placeholder="Search" />
+                </div>
+                <a class="nav__link is--hori" href="{% url 'profile' %}" background-image="url('#')"></a>
             {% else %}
                 <a href="{% url 'login' %}"><button class="nav__register-btn secondary">Log In</button></a>
                 <a href="{% url 'signup' %}"><button class="nav__register-btn">Sign Up</button></a>
@@ -40,13 +49,13 @@
                   <path d="M16.1377 12.8011C15.5979 10.8732 13.5158 9.79362 11.5879 10.4106L11.0481 10.5648C9.1973 11.1817 7.19229 11.1817 5.26439 10.5648L4.72458 10.4106C2.79668 9.79362 0.714547 10.8732 0.174735 12.8011C-0.287961 14.4977 0.174735 16.2714 1.48571 17.5052C3.25937 19.0475 5.64997 20.05 8.19479 20.05C10.7396 20.05 13.1302 19.0475 14.8268 17.5052C16.1377 16.3485 16.6004 14.4977 16.1377 12.8011Z" fill="white"/>
                 </svg>
               </a>
-              {% url 'groups' as groups %}
+              {% comment %} {% url 'groups' as groups %}
               <a {% if request.path == groups %} class="nav__link active" {% else %} class="nav__link" {% endif %} href="{{ groups }}">
                 <svg width="14" height="22" viewBox="0 0 14 22" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path d="M0 1C0 0.447716 0.447715 0 1 0V0C1.55228 0 2 0.447715 2 1V21C2 21.5523 1.55228 22 1 22V22C0.447715 22 0 21.5523 0 21V1Z" fill="white"/>
                   <path d="M11.8942 5.44712L4.44721 1.72361C3.78231 1.39116 3 1.87465 3 2.61803V10.0651C3 10.8085 3.78231 11.2919 4.44722 10.9595L11.8943 7.23598C12.6313 6.86746 12.6313 5.81565 11.8942 5.44712Z" fill="white"/>
                 </svg>
-              </a>
+              </a> {% endcomment %}
             </div>
             {% if user.is_authenticated %}
             <div>

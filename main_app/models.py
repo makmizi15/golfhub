@@ -7,7 +7,7 @@ from django.db.models import Q
 
 class Profile(models.Model):
 
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    user = models.OneToOneField(User, related_name="profile", on_delete=models.CASCADE)
     name = models.CharField(max_length=100)
     img = models.CharField(max_length=1000)
     bio = models.TextField(max_length=500)
@@ -27,4 +27,40 @@ class Profile(models.Model):
                 name='profile_handicap_range',
                 check=Q(handicap__gte=0.0) & Q(handicap__lte=54.0))
         ]
+
+class GolfGroup(models.Model):
+    
+    GAME_CHOICES = (
+        ('2-Man Scramble', '2-Man Scramble'),
+        ('Freeplay', 'Freeplay'),
+    )
+
+    creator = models.ForeignKey(Profile, on_delete=models.CASCADE, serialize=True, related_name='creator', null=True)
+    golf_course = models.CharField(max_length=100)
+    tee_time = models.DateTimeField()
+    description = models.CharField(max_length=200, help_text="Write a description in 200 words or less")
+    game_type = models.CharField(max_length=50, choices=GAME_CHOICES, default="f")
+
+    def __str__(self):
+        return self.golf_course
+        
+    class Meta:
+        ordering = ['tee_time']
+
+# class Artist(models.Model):
+
+#     name = models.CharField(max_length=100)
+#     img = models.CharField(max_length=250)
+#     bio = models.TextField(max_length=500)
+#     verified_artist = models.BooleanField(default=False)
+#     created_at = models.DateTimeField(auto_now_add=True)
+    
+#     def __str__(self):
+#         return self.name
+
+#     class Meta:
+#         ordering = ['name']
+
+
+
 
