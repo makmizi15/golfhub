@@ -1,7 +1,13 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.core.validators import MaxValueValidator, MinValueValidator
+from django.utils import timezone, dateformat
+import datetime
 from django.db.models import Q
+from django import forms
+
+# format timezone.now
+formatted_date = dateformat.format(timezone.localtime(), 'm/d/Y P')
 
 # Create your models here.
 
@@ -28,7 +34,8 @@ class Profile(models.Model):
                 check=Q(handicap__gte=0.0) & Q(handicap__lte=54.0))
         ]
 
-class GolfGroup(models.Model):
+
+class GolfGroup(models.Model):  
     
     GAME_CHOICES = (
         ('2-Man Scramble', '2-Man Scramble'),
@@ -37,30 +44,19 @@ class GolfGroup(models.Model):
 
     creator = models.ForeignKey(Profile, on_delete=models.CASCADE, serialize=True, related_name='creator', null=True)
     golf_course = models.CharField(max_length=100)
-    tee_time = models.DateTimeField()
+    tee_date = models.DateField()
+    tee_time = models.TimeField()
     description = models.CharField(max_length=200, help_text="Write a description in 200 words or less")
     game_type = models.CharField(max_length=50, choices=GAME_CHOICES, default="f")
 
-    def __str__(self):
-        return self.golf_course
+    # def __str__(self):
+    #     return self.golf_course
         
-    class Meta:
-        ordering = ['tee_time']
+    # class Meta:
+    #     ordering = ['tee_time']
 
-# class Artist(models.Model):
-
-#     name = models.CharField(max_length=100)
-#     img = models.CharField(max_length=250)
-#     bio = models.TextField(max_length=500)
-#     verified_artist = models.BooleanField(default=False)
-#     created_at = models.DateTimeField(auto_now_add=True)
-    
-#     def __str__(self):
-#         return self.name
-
-#     class Meta:
-#         ordering = ['name']
-
+# class MyModel(models.Model):
+#     my_date = models.DateField('my date')
 
 
 

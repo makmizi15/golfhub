@@ -1,7 +1,18 @@
 from django import forms
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
-from .models import Profile
+from .models import Profile, GolfGroup
+from django.forms import ModelForm
+
+
+# WIDGETS
+class DateInput(forms.DateInput):
+    input_type = 'date'
+
+class TimeInput(forms.TimeInput):
+    input_type = 'time'
+
+
 
 
 class UserRegisterForm(UserCreationForm):
@@ -31,3 +42,28 @@ def form_validation_error(form):
         for error in field.errors:
             msg += "%s: %s \\n" % (field.label if hasattr(field, 'label') else 'Error', error)
     return msg
+
+
+
+class GroupForm(forms.ModelForm):
+    class Meta:
+        model = GolfGroup
+        fields = '__all__'
+        widgets = {
+            'tee_date' : DateInput(),
+            'tee_time' : TimeInput(format='%H:%M'),
+            'description' : forms.Textarea(attrs={'cols': 40, 'rows': 10})
+        }
+
+# class MyModelForm(forms.ModelForm):
+#     class Meta:
+#         model = MyModel
+#         fields = '__all__'
+#         widgets = {
+#             'my_date': DateInput()
+#         }
+
+
+        
+
+
