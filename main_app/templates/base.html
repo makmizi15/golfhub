@@ -6,8 +6,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="{% static 'styles/main.css' %}" />
-    <link rel="stylesheet" href="https://use.typekit.net/hdr2oks.css">
-    <script src="{% static 'scripts/main.js' %}" defer></script>
+    {% comment %} <link rel="stylesheet" href="https://use.typekit.net/hdr2oks.css"> {% endcomment %}
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" defer integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="{% static 'scripts/index.js' %}" defer></script>
     <title>Golfhub - {% block title %}{% endblock %}</title> 
   </head>
   <body >

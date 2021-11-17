@@ -42,9 +42,24 @@
         <div class="group__section">
             
         </div>
-        <div class="group__section flex-column flex-center-vert flex-align-end">
+        <div class="group__section flex-row justify-end">
+                <figure class="elipses__bg">
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                </figure>
             <button class="group__cta">Request to join</button>
         </div>
     </div>
-    {% endfor %}
+    <div class="update-popup__bg">
+        <div class="update-popup__wrap">
+            <a href="{% url 'group_delete' group.pk %}">Delete</a>
+            <div class="divider"></div>
+            <a href="{% url 'group_update' group.pk %}">Edit</a>
+            <div class="divider"></div>
+            <a crud-popup-cancel>Cancel</a>
+        </div>
+    </div>
+</main>
+{% endfor %}
 {% endblock %}

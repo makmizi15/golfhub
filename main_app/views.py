@@ -7,7 +7,7 @@ from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
-from django.views.generic.edit import CreateView
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from .models import GolfGroup
 from .forms import GroupForm
 
@@ -46,6 +46,18 @@ class GroupCreate(CreateView):
     model = GolfGroup
     form_class = GroupForm
     template_name = "group_create.html"
+    success_url = "/"
+
+class GroupUpdate(UpdateView):
+    model = GolfGroup
+    form_class = GroupForm
+    template_name = "group_create.html"
+    success_url = "/"
+
+class GroupDelete(DeleteView):
+    model = GolfGroup
+    form_class = GroupForm
+    template_name = "group_delete.html"
     success_url = "/"
 
 
