@@ -2,9 +2,10 @@ from django.contrib.auth.models import Group
 from django.shortcuts import redirect, render
 from django.views import View
 from django.http import HttpResponse
-from django.views.generic.base import TemplateView
+from django.views.generic import TemplateView
 from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
@@ -29,12 +30,14 @@ class Signup(View):
             return render(request, "registration/signup.html", context)
 
 
-class Profile(TemplateView):
-    template_name = "profile.html"
+# class Profile(TemplateView):
+#     template_name = "profile.html"
 
 
 class GroupList(TemplateView):
+    model = GolfGroup
     template_name = "home.html"
+    
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["groups"] = GolfGroup.objects.all() # Here we are using the model to query the database for us.
@@ -48,12 +51,18 @@ class GroupCreate(CreateView):
     template_name = "group_create.html"
     success_url = "/"
 
+    def form_valid(self, form):
+        form.instance.creator = self.request.user
+        return super().form_valid(form)
+
+@method_decorator(login_required, name='dispatch')
 class GroupUpdate(UpdateView):
     model = GolfGroup
     form_class = GroupForm
     template_name = "group_create.html"
     success_url = "/"
 
+@method_decorator(login_required, name='dispatch')
 class GroupDelete(DeleteView):
     model = GolfGroup
     form_class = GroupForm

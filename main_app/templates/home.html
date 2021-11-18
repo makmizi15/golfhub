@@ -5,6 +5,7 @@
     <div>
         <h1>List of groups</h1>
         <p>Let's find you a group.</p>
+        Welcome: {{user.username}}
     </div>
     <div class="filter__wrap">
         <div class="filter__btn">
@@ -19,35 +20,43 @@
     </div>
     {% for group in groups %}
     <div class="group__card">
-    
-        <div class="group__section is--posters-info">
-            <img class="group__profile-img">
-            <div class="flex-column flex-center-vert">
-                <span class="group__username">{{group.creator}}</span>
-                <span class="group__game-type">{{group.game_type}}</span>
-            </div>
-        </div>
-        <div class="group__section">
-            <div class="flex-column flex-center-vert h-full flex-gap-4">
-                <div class="flex-row ">
-                    <img class="group__img-bullet" src="../static/images/flag__icon.svg">
-                    <span>{{group.golf_course}}</span>
-                </div>
-                <div class="flex-row ">
-                    <img class="group__img-bullet" src="../static/images/icon__clock.svg">
-                    <span>{{group.tee_date}} | {{group.tee_time}}</span>
+        <div class="flex-row flex-center-vert" id="group__info">
+            <div class="flex-row flex-center-vert">
+                <img class="group__profile-img">
+                <div class="flex-column flex-center-vert">
+                    <span class="group__username">{{group.creator.username}}</span>
+                    <span class="group__game-type">{{group.game_type}}</span>
                 </div>
             </div>
+            <div>
+                <div class="flex-column flex-center-vert h-full flex-gap-4">
+                    <div class="flex-row ">
+                        <img class="group__img-bullet" src="../static/images/flag__icon.svg">
+                        <span>{{group.golf_course}}</span>
+                    </div>
+                    <div class="flex-row ">
+                        <img class="group__img-bullet" src="../static/images/icon__clock.svg">
+                        <span>{{group.tee_date}} | {{group.tee_time}}</span>
+                    </div>
+                </div>
+            </div>
+            <div id="group__members-wrap">
+                <div class="group__member"></div>
+                <div class="group__member"></div>
+                <div class="group__member"></div>
+                <a class="group__member --add-member">
+                    <div class="add-member__btn"><img src="../static/images/plus.svg"></div>
+                </a>
+            </div>
         </div>
-        <div class="group__section">
-            
-        </div>
-        <div class="group__section flex-row justify-end">
+        <div class="flex-row">
+            {% if user.is_authenticated and group.creator.id == user.id %}
                 <figure class="elipses__bg">
                     <div></div>
                     <div></div>
                     <div></div>
                 </figure>
+            {% endif %}
             <button class="group__cta">Request to join</button>
         </div>
     </div>

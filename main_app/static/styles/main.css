@@ -110,6 +110,10 @@ h1 {
 
 /* Reusable styles */
 
+.flex-row.flex-center-vert {
+    align-items: center;
+}
+
 .flex-row {
     display: flex;
 }
@@ -333,22 +337,15 @@ h1 {
     min-height: 80px;
     background-color: var(--dark-blue-80);
     border-radius: 20px;
-    display: flex;
     padding: 16px;
     display: flex;
-    justify-content: stretch;
+    justify-content: space-between;
+    align-items: center;
     gap: 20px;
     margin-bottom: 12px;
 }
 
-.group__section {
-    width: calc(100% / 4);
-    position: relative;
-}
 
-.group__section.is--posters-info{
-    display: flex;
-}
 
 .group__username {
     font-size: 18px;
@@ -372,7 +369,7 @@ h1 {
 
 .group__profile-img {
     width: 48px;
-    height: 100%;
+    height: 48px;
     background-color: var(--secondary-blue);
     border-radius: 16px;
     margin-right: 12px;
@@ -500,5 +497,64 @@ h1 {
     height: 1px;
     width: 100%;
     background-color: var(--white-40);
+}
+
+#group__members-wrap {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    /* padding-left: 48px; */
+}
+
+#group__members-wrap div:nth-child(2){
+    position: relative;
+    left: -16%
+}
+
+#group__members-wrap div:nth-child(3){
+    position: relative;
+    left: -32%
+}
+
+#group__members-wrap a{
+    position: relative;
+    left: -48%
+}
+
+.group__member {
+    width: 48px;
+    height: 48px;
+    background-color: var(--secondary-blue);
+    border-radius: 999px;
+    border: 2px solid var(--dark-blue-80)
+
+}
+
+.group__member.--add-member {
+    background-color: var(--brand-color);
+    position: relative;
+}
+
+.add-member__btn {
+    position: absolute;
+    top:0px;
+    right: 0px;
+    width: 16px;
+    height: 16px;
+    border-radius: 999px;
+    background-color: var(--brand-color-light);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.add-member__btn img {
+    width: 66.66%;
+    height: auto;
+
+}
+
+#group__info > div{
+    margin-right: 56px;
 }
 

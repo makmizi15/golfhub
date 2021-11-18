@@ -27,7 +27,7 @@
                   </div>
                   <input class="search__input" type="text" name="name" placeholder="Search" />
                 </div>
-                <a class="nav__link is--hori" href="{% url 'profile' %}" background-image="url('#')"></a>
+                <a class="nav__link is--hori" href="{% url 'home' %}" background-image="url('#')"></a>
             {% else %}
                 <a href="{% url 'login' %}"><button class="nav__register-btn secondary">Log In</button></a>
                 <a href="{% url 'signup' %}"><button class="nav__register-btn">Sign Up</button></a>
@@ -43,7 +43,7 @@
                   <path d="M6.5436 1.54743L0.5436 7.92243C0.194428 8.29342 0 8.78369 0 9.29315V18C0 19.1046 0.895431 20 2 20H14C15.1046 20 16 19.1046 16 18V9.29315C16 8.78368 15.8056 8.29342 15.4564 7.92242L9.4564 1.54742C8.66673 0.708397 7.33327 0.708399 6.5436 1.54743Z" fill="white"/>
                 </svg>
               </a>
-              {% url 'profile' as profile %}
+              {% url 'profile' as home %}
               <a {% if request.path == profile %} class="nav__link active" {% else %} class="nav__link" {% endif %} href="{{ profile }}">
                 <svg width="16" height="20" viewBox="0 0 17 21" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path d="M8.19481 8.48275C10.5373 8.48275 12.4362 6.58382 12.4362 4.24138C12.4362 1.89893 10.5373 0 8.19481 0C5.85236 0 3.95343 1.89893 3.95343 4.24138C3.95343 6.58382 5.85236 8.48275 8.19481 8.48275Z" fill="white"/>

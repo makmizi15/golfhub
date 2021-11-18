@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
-from .models import Profile, GolfGroup
+from .models import GolfGroup
 from django.forms import ModelForm
 
 
@@ -29,10 +29,10 @@ class UserUpdateForm(forms.ModelForm):
         model = User
         fields = ['username', 'email']
 
-class ProfileUpdateForm(forms.ModelForm):
-    class Meta:
-        model = Profile
-        fields = ['name', 'location', 'img', 'bio', 'handicap', 'favorite_course']
+# class ProfileUpdateForm(forms.ModelForm):
+#     class Meta:
+#         model = Profile
+#         fields = ['name', 'location', 'img', 'bio', 'handicap', 'favorite_course']
 
 
 
@@ -48,7 +48,7 @@ def form_validation_error(form):
 class GroupForm(forms.ModelForm):
     class Meta:
         model = GolfGroup
-        fields = '__all__'
+        fields = ['golf_course', 'tee_date', 'tee_time', 'description', 'game_type']
         widgets = {
             'tee_date' : DateInput(),
             'tee_time' : TimeInput(format='%H:%M'),
