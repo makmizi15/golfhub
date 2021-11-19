@@ -5,7 +5,6 @@
     <div>
         <h1>List of groups</h1>
         <p>Let's find you a group.</p>
-        Welcome: {{user.username}}
     </div>
     <div class="filter__wrap">
         <div class="filter__btn">
@@ -22,11 +21,13 @@
     <div class="group__card">
         <div class="flex-row flex-center-vert" id="group__info">
             <div class="flex-row flex-center-vert">
+            <a href="{% url 'profile' group.creator.profile.id %}">
             {% if group.creator.profile.profile_img %}
                 <img class="group__profile-img" src="{{ group.creator.profile.profile_img.url }}">
             {% else %}
                 <img class="group__profile-img" src="main_app/media/profile/profile-image-default.jpeg">
             {% endif %}
+            </a>
                 <div class="flex-column flex-center-vert">
                     <span class="group__username">{{group.creator.username}}</span>
                     <span class="group__game-type">{{group.game_type}}</span>
@@ -46,13 +47,14 @@
             </div>
             <div id="group__members-wrap">
                 {% for member in group.members.all %}
+                <a href="{% url 'profile' member.profile.id %}">
                 {% if member.profile.profile_img %}
                 <img class="group__member" src="{{ member.profile.profile_img.url }}">
                 {% else %}
                 <img class="group__member" src="main_app/media/profile/profile-image-default.jpeg">
                 {% endif %}
+                </a>
                 {% endfor %}
-                <p>{{ group.members.all | length }} </p>
             </div>
         </div>
         <div class="flex-row">

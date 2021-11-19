@@ -507,19 +507,18 @@ h1 {
     /* padding-left: 48px; */
 }
 
-#group__members-wrap img:nth-child(2){
+#group__members-wrap a:hover img{
+    border: 2px solid var(--brand-color);
+}
+
+#group__members-wrap a:nth-child(2){
     position: relative;
     left: -16%
 }
 
-#group__members-wrap img:nth-child(3){
+#group__members-wrap a:nth-child(3){
     position: relative;
     left: -32%
-}
-
-#group__members-wrap a{
-    position: relative;
-    left: -48%
 }
 
 .group__member {

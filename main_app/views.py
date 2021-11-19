@@ -8,6 +8,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
+from django.views.generic import DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy, reverse
 from .models import GolfGroup, Profile
@@ -37,8 +38,24 @@ class Signup(View):
             return render(request, "registration/signup.html", context)
 
 
-class Profile(TemplateView):
+class ProfileView(DetailView):
+    model = Profile
     template_name = "profile.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        page_user = get_object_or_404(Profile, id=self.kwargs['pk'])
+        context["page_user"] = page_user
+        return context
+
+# class ProfileCreate(CreateView):
+#     model = Profile
+#     template_name = "profile_create.html"
+#     success_url = "/profile"
+
+#     def form_valid(self, form):
+#         form.instance.creator = self.request.user
+#         return super().form_valid(form)
 
 
 class GroupList(TemplateView):

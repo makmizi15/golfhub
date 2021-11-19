@@ -14,7 +14,7 @@ formatted_date = dateformat.format(timezone.localtime(), 'm/d/Y P')
 class Profile(models.Model):
 
     user = models.OneToOneField(User, null=True, related_name="profile", on_delete=models.CASCADE)
-    profile_img = models.ImageField(null=True, blank=True, upload_to='profile',)
+    profile_img = models.ImageField(null=True, blank=True, upload_to='profile', default='profile/profile-image-default.jpeg')
     bio = models.TextField(max_length=500)
     location = models.CharField(max_length=100)
     handicap = models.IntegerField(validators=[MinValueValidator(0.0), MaxValueValidator(54.0)], blank=True)
@@ -45,7 +45,7 @@ class GolfGroup(models.Model):
     tee_date = models.DateField()
     tee_time = models.TimeField()
     description = models.TextField(max_length=200)
-    members = models.ManyToManyField(User, related_name='members', null=True, blank=True)
+    members = models.ManyToManyField(User, related_name='members', blank=True)
     game_type = models.CharField(max_length=50, choices=GAME_CHOICES, default="f")
 
     def total_members(self):
