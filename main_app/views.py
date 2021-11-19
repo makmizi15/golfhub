@@ -1,7 +1,7 @@
 from django.contrib.auth.models import Group
-from django.shortcuts import redirect, render
+from django.shortcuts import redirect, render, get_object_or_404
 from django.views import View
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from django.views.generic import TemplateView
 from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
@@ -9,10 +9,17 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
-from .models import GolfGroup
+from django.urls import reverse_lazy, reverse
+from .models import GolfGroup, Profile
 from .forms import GroupForm
 
 # Create your views here.
+
+def MemberView(request, pk):
+    group = get_object_or_404(GolfGroup, id=request.POST.get('group_id'))
+    group.members.add(request.user)
+    print(group.members)
+    return redirect('home')
 
 class Signup(View):
     def get(self, request):
@@ -30,8 +37,8 @@ class Signup(View):
             return render(request, "registration/signup.html", context)
 
 
-# class Profile(TemplateView):
-#     template_name = "profile.html"
+class Profile(TemplateView):
+    template_name = "profile.html"
 
 
 class GroupList(TemplateView):
@@ -68,5 +75,6 @@ class GroupDelete(DeleteView):
     form_class = GroupForm
     template_name = "group_delete.html"
     success_url = "/"
+
 
 

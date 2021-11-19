@@ -11,28 +11,26 @@ formatted_date = dateformat.format(timezone.localtime(), 'm/d/Y P')
 
 # Create your models here.
 
-# class Profile(models.Model):
+class Profile(models.Model):
 
-#     user = models.OneToOneField(User, related_name="profile", on_delete=models.CASCADE)
-#     name = models.CharField(max_length=100)
-#     img = models.CharField(max_length=1000)
-#     bio = models.TextField(max_length=500)
-#     location = models.CharField(max_length=100)
-#     handicap = models.IntegerField(validators=[MinValueValidator(0.0), MaxValueValidator(54.0)], blank=True)
-#     favorite_course = models.CharField(max_length=100)
+    user = models.OneToOneField(User, null=True, related_name="profile", on_delete=models.CASCADE)
+    profile_img = models.ImageField(null=True, blank=True, upload_to='profile',)
+    bio = models.TextField(max_length=500)
+    location = models.CharField(max_length=100)
+    handicap = models.IntegerField(validators=[MinValueValidator(0.0), MaxValueValidator(54.0)], blank=True)
+    favorite_course = models.CharField(max_length=100)
 #     created_at = models.DateTimeField(auto_now_add=True)
 
-#     def __str__(self):
-#         return self.name
+    def __str__(self):
+        return str(self.user)
 
-#     class Meta:
-#         ordering = ['name']
-#         constraints = [
-#             # for checking that handicap is between 0 and 54 in DB
-#             models.CheckConstraint(
-#                 name='profile_handicap_range',
-#                 check=Q(handicap__gte=0.0) & Q(handicap__lte=54.0))
-#         ]
+    class Meta:
+        constraints = [
+            # for checking that handicap is between 0 and 54 in DB
+            models.CheckConstraint(
+                name='profile_handicap_range',
+                check=Q(handicap__gte=0.0) & Q(handicap__lte=54.0))
+        ]
 
 
 class GolfGroup(models.Model):  
@@ -47,8 +45,11 @@ class GolfGroup(models.Model):
     tee_date = models.DateField()
     tee_time = models.TimeField()
     description = models.TextField(max_length=200)
-    members = models.ManyToManyField(User, on_delete=models.CASCADE, related_name='members', null=True)
+    members = models.ManyToManyField(User, related_name='members', null=True, blank=True)
     game_type = models.CharField(max_length=50, choices=GAME_CHOICES, default="f")
+
+    def total_members(self):
+        return self.members.count()
 
     def __str__(self):
         return str(self.creator) + '|' + self.golf_course

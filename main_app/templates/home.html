@@ -22,7 +22,11 @@
     <div class="group__card">
         <div class="flex-row flex-center-vert" id="group__info">
             <div class="flex-row flex-center-vert">
-                <img class="group__profile-img">
+            {% if group.creator.profile.profile_img %}
+                <img class="group__profile-img" src="{{ group.creator.profile.profile_img.url }}">
+            {% else %}
+                <img class="group__profile-img" src="main_app/media/profile/profile-image-default.jpeg">
+            {% endif %}
                 <div class="flex-column flex-center-vert">
                     <span class="group__username">{{group.creator.username}}</span>
                     <span class="group__game-type">{{group.game_type}}</span>
@@ -41,12 +45,14 @@
                 </div>
             </div>
             <div id="group__members-wrap">
-                <div class="group__member"></div>
-                <div class="group__member"></div>
-                <div class="group__member"></div>
-                <a class="group__member --add-member">
-                    <div class="add-member__btn"><img src="../static/images/plus.svg"></div>
-                </a>
+                {% for member in group.members.all %}
+                {% if member.profile.profile_img %}
+                <img class="group__member" src="{{ member.profile.profile_img.url }}">
+                {% else %}
+                <img class="group__member" src="main_app/media/profile/profile-image-default.jpeg">
+                {% endif %}
+                {% endfor %}
+                <p>{{ group.members.all | length }} </p>
             </div>
         </div>
         <div class="flex-row">
@@ -57,7 +63,13 @@
                     <div></div>
                 </figure>
             {% endif %}
-            <button class="group__cta">Request to join</button>
+            {% if group.creator.id != user.id %}
+            <form action="{% url 'member_group' group.pk %}" method="POST">
+                {% csrf_token %}
+                {{form.as_p}}
+                <button type="submit" class="group__cta" name="group_id" value="{{ group.id }}">Join</button>
+            </form>
+            {% endif %}
         </div>
     </div>
     <div class="update-popup__bg">

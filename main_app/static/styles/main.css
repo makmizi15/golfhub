@@ -212,6 +212,10 @@ h1 {
     cursor: pointer;
 }
 
+.--blue-bg {
+    background-color: var(--secondary-blue);
+}
+
 .nav__link.is--hori {
     width: 42px;
     height: 42px;
@@ -237,16 +241,13 @@ h1 {
     transition: border-color 300ms ease-out;
 }
 
-.nav__link.is--bottom:hover {
-    border: 2px solid var(--white);
-} 
+.nav__link.is--bottom img{
+    width: 50%;
+    height: auto;
+}
 
 .nav__link.active svg path {
     fill: var(--brand-color) !important;
-}
-
-.nav__link:hover {
-    opacity: .8;
 }
 
 .nav__vert .nav__link:nth-child(3) svg{
@@ -506,12 +507,12 @@ h1 {
     /* padding-left: 48px; */
 }
 
-#group__members-wrap div:nth-child(2){
+#group__members-wrap img:nth-child(2){
     position: relative;
     left: -16%
 }
 
-#group__members-wrap div:nth-child(3){
+#group__members-wrap img:nth-child(3){
     position: relative;
     left: -32%
 }
