@@ -147,7 +147,7 @@ LOGOUT_REDIRECT_URL = '/'
 # Configure Django App for Heroku.
 DEBUG = False
 SECURE_SSL_REDIRECT = True
-ALLOWED_HOSTS = ['*.herokuapp.com']
+ALLOWED_HOSTS = ['*']
 DATABASE_URL = os.environ['DATABASE_URL']
 conn = psycopg2.connect(DATABASE_URL, sslmode='require')
 import dj_database_url
