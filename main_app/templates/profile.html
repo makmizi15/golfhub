@@ -8,9 +8,9 @@
         <div class="flex-row flex-center-vert flex-gap-20" style="margin-bottom: 20px;">
             <div class="profile-info__image-wrap">
             {% if page_user.profile_img %}
-                <img width="100" height="100" src="{{ page_user.profile_img.url }}">
+                <img width="100" height="100" src="{{ page_user.profile_img.url }}" style="object-fit: cover; object-position: center">
             {% else %}
-                <img width="100" height="100" src="main_app/media/profile/profile-image-default.jpeg">
+                <img width="100" height="100" style="object-fit: cover; object-position: center" src="main_app/media/profile/profile-image-default.jpeg">
             {% endif %}
             <a class="profile__edit-btn" href="{% url 'profile_update' user.profile.id %}">
                 <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">

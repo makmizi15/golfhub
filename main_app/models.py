@@ -14,7 +14,7 @@ formatted_date = dateformat.format(timezone.localtime(), 'm/d/Y P')
 class Profile(models.Model):
 
     user = models.OneToOneField(User, null=True, related_name="profile", on_delete=models.CASCADE)
-    profile_img = models.ImageField(null=True, blank=True, upload_to='profile', default='profile/profile-image-default.jpeg')
+    profile_img = models.ImageField(null=True, blank=True, upload_to='profile',)
     bio = models.TextField(max_length=200)
     location = models.CharField(max_length=100)
     handicap = models.IntegerField(validators=[MinValueValidator(0.0), MaxValueValidator(54.0)], blank=True)
