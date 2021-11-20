@@ -136,4 +136,6 @@ LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
 
 # Configure Django App for Heroku.
+DEBUG = False
+SECURE_SSL_REDIRECT = True
 django_heroku.settings(locals())
