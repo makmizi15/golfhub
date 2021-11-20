@@ -2,13 +2,13 @@
 {% block title %}Create Golf Group{% endblock  %}
 {% block content %}
 
-<h1>Create a Group</h1>
-<form action="" method="post">
+<form class="form-create" action="" method="post">
+<h1 style="margin-bottom: 24px;">Create a Group</h1>
 <!-- Security Feature  -->
   {% csrf_token %} 
 <!--  Generate inputs  -->
-  {{form.as_p}} 
+  {{form.as_table}} 
 <!--  Submit form  -->
-  <input type="submit" value="Submit" />
+  <button class="" type="submit" value="Submit">Submit</button>
 </form>
 {% endblock %}

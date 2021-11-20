@@ -407,6 +407,11 @@ h1, h2, h3 {
     background-color: var(--err-red);
 }
 
+.group__cta.--red-btn:hover {
+    background-color: #f5b4b4;
+    color: var(--err-red)
+}
+
 .group__profile-img {
     width: 48px;
     height: 48px;
@@ -666,4 +671,76 @@ h1, h2, h3 {
 
 .profile-info__value.--grey {
     background-color: var(--dark-blue-60);
+}
+
+.form-create {
+    max-width: 450px;
+    width: 100%;
+    margin: 0 auto;
+    background-color: var(--dark-blue-80);
+    padding: 32px;
+    border-radius: 20px;
+}
+
+.form-create label {
+    display: block;
+    margin-bottom: 4px;
+}
+.form-create input {
+    display: block;
+    margin-bottom: 8px;
+    background-color: var(--dark-blue-60);
+    border: none;
+    border-radius: 12px;
+    padding: 8px 12px;
+    color: var(--white-60);
+    outline: none;
+}
+
+.form-create textarea {
+    display: block;
+    margin-bottom: 8px;
+    background-color: var(--dark-blue-60);
+    border: none;
+    border-radius: 12px;
+    padding: 8px 12px;
+    color: var(--white-60);
+    outline: none;
+}
+
+.form-create input:focus {
+    border: 1px solid var(--secondary-blue);
+}
+.form-create textarea:focus {
+    border: 1px solid var(--secondary-blue);
+}
+.form-create select:focus {
+    border: 1px solid var(--secondary-blue);
+}
+
+.form-create ::-webkit-calendar-picker-indicator {
+    filter: invert(1);
+}
+
+.form-create select {
+    display: block;
+    margin-bottom: 8px;
+    background-color: var(--dark-blue-60);
+    border: none;
+    border-radius: 12px;
+    padding: 8px 12px;
+    color: var(--white-60);
+    outline: none;
+}
+
+.form-create button {
+    margin-top: 24px;
+    padding: 0 24px;
+    background-color: var(--brand-color);
+    transition: all ease-out 200ms;
+}
+
+.form-create button:hover {
+    background-color: var(--brand-color-light);
+    color: var(--brand-color);
 }
