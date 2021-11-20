@@ -336,18 +336,28 @@ h1, h2, h3 {
 .nav__register-btn {
     padding: 12px 0;
     width: 96px;
-    background-color: var(--secondary-blue);
+    transition: all ease-out 300ms;
 }
 
+
+.nav__register-btn.primary {
+    background-color: var(--secondary-blue);
+    margin-right: 8px;
+}
+
+.nav__register-btn.primary:hover {
+    background-color: var(--white);
+    color: var(--secondary-blue)
+}
 
 .nav__register-btn.secondary {
     background-color: var(--dark-blue-60);
     margin-right: 8px;
-    transition: background-color ease-out 300ms;
 }
 
 .nav__register-btn.secondary:hover {
-    background-color: var(--secondary-blue);
+    background-color: var(--white);
+    color: var(--secondary-blue)
 }
 
 .logo {

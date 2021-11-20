@@ -1,9 +1,9 @@
 {% extends 'base.html' %} {% block content %}
 
-<h1>Sign Up</h1>
-<form method="post" action="{% url 'signup' %}">
+<form class="form-create" method="post" action="{% url 'signup' %}">
+<h1 style="margin-bottom: 24px;">Sign Up</h1>
   {% csrf_token %} {{ form.as_p }}
-  <input type="submit" value="Sign Up" />
+  <button type="submit" value="Sign Up">Sign up</button>
   <input type="hidden" name="next" value="{{ next }}" />
 </form>
 
