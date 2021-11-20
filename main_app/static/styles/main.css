@@ -237,6 +237,13 @@ h1, h2, h3 {
     transition: background-color 300ms ease-out;
     cursor: pointer;
     overflow: hidden;
+    height: 32px;
+    width: 32px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: transparent;
+    border-radius: 6px;
 }
 
 .--blue-bg {
@@ -271,6 +278,10 @@ h1, h2, h3 {
 .nav__link.is--bottom img{
     width: 50%;
     height: auto;
+}
+
+.nav__link.active {
+    background-color: var(--dark-blue-80);
 }
 
 .nav__link.active svg path {
