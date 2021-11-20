@@ -9,6 +9,7 @@ psycopg2 = "*"
 django-heroku = "*"
 whitenoise = "*"
 pillow = "*"
+bower = "*"
 
 [dev-packages]
 
