@@ -68,8 +68,11 @@
             {% if group.creator.id != user.id %}
             <form action="{% url 'member_group' group.pk %}" method="POST">
                 {% csrf_token %}
-                {{form.as_p}}
-                <button type="submit" class="group__cta" name="group_id" value="{{ group.id }}">Join</button>
+                {% if user in group.members.all %}
+                    <button type="submit" name="group_id" value="{{ group.id }}" class="group__cta --red-btn">Leave</button>
+                {% else %}
+                    <button type="submit" name="group_id" value="{{ group.id }}" class="group__cta">Join</button>
+                {% endif %}
             </form>
             {% endif %}
         </div>

@@ -1,15 +1,123 @@
 {% extends 'base.html' %} 
 {% block title %}Profile{% endblock  %}
 {% block content %}
-<h1>{{ page_user }}</h1>
-{% if page_user.profile_img %}
-    <img width="100" height="100" src="{{ page_user.profile_img.url }}">
-{% else %}
-    <img width="100" height="100" src="main_app/media/profile/profile-image-default.jpeg">
-{% endif %}
 
-<p>{{ page_user.bio }}</p>
-<p>{{ page_user.location }}</p>
-<p>{{ page_user.handicap }}</p>
-<p>{{ page_user.favorite_course }}</p>
+
+<div class="flex-row space-between flex-gap-40 mh-full">
+    <div class="profile-info__container">
+        <div class="flex-row flex-center-vert flex-gap-20" style="margin-bottom: 20px;">
+            <div class="profile-info__image-wrap">
+            {% if page_user.profile_img %}
+                <img width="100" height="100" src="{{ page_user.profile_img.url }}">
+            {% else %}
+                <img width="100" height="100" src="main_app/media/profile/profile-image-default.jpeg">
+            {% endif %}
+            <a class="profile__edit-btn" href="{% url 'profile_update' user.profile.id %}">
+                <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M9.77609 9.69832e-06C9.48415 -0.000855479 9.19493 0.0561738 8.92517 0.167798C8.65542 0.279423 8.41047 0.443427 8.2045 0.650324L4.17487 4.68189C3.83198 5.02256 3.56013 5.42792 3.37507 5.87444C3.19002 6.32097 3.09544 6.79979 3.09682 7.28314V8.90312H4.7168C5.19982 8.90425 5.67828 8.80954 6.12446 8.62449C6.57063 8.43945 6.97567 8.16773 7.31612 7.82507L11.3496 3.79545C11.6604 3.48433 11.8719 3.08806 11.9575 2.65673C12.0431 2.22541 11.9989 1.77839 11.8305 1.37217C11.6621 0.965963 11.3771 0.618799 11.0114 0.374562C10.6457 0.130326 10.2158 -1.66651e-05 9.77609 9.69832e-06ZM10.527 2.97288L6.49742 7.00444C6.26415 7.23903 5.98666 7.425 5.681 7.55158C5.37535 7.67816 5.04762 7.74283 4.7168 7.74185H4.25809V7.28314C4.25737 6.95265 4.32216 6.62528 4.44873 6.31998C4.57531 6.01468 4.76115 5.73749 4.9955 5.50446L9.02707 1.47289C9.22833 1.2842 9.49509 1.18119 9.77093 1.18564C10.0468 1.19008 10.3101 1.30164 10.5052 1.49672C10.7002 1.69179 10.8118 1.9551 10.8162 2.23094C10.8207 2.50679 10.7177 2.77355 10.529 2.97481L10.527 2.97288Z" fill="#1D1F23"/>
+                    <path d="M2.12901 11.9998H9.09666C9.66131 11.9998 10.2028 11.7755 10.6021 11.3763C11.0014 10.977 11.2257 10.4355 11.2257 9.87083V6.7741H10.0644V9.87083C10.0644 10.1275 9.96243 10.3736 9.78095 10.5551C9.59947 10.7366 9.35332 10.8386 9.09666 10.8386H2.12901C1.87235 10.8386 1.6262 10.7366 1.44472 10.5551C1.26323 10.3736 1.16128 10.1275 1.16128 9.87083V2.90318C1.16128 2.64652 1.26323 2.40037 1.44472 2.21889C1.6262 2.0374 1.87235 1.93545 2.12901 1.93545H5.22574V0.77417H2.12901C1.56436 0.77417 1.02284 0.998475 0.623571 1.39774C0.224305 1.79701 0 2.33853 0 2.90318V9.87083C0 10.4355 0.224305 10.977 0.623571 11.3763C1.02284 11.7755 1.56436 11.9998 2.12901 11.9998Z" fill="#1D1F23"/>
+                </svg>
+            </a>
+            </div>
+            <div>
+                <h2>{{ page_user }}</h2>
+                <span>{{ page_user.location }}</span>
+            </div>
+        </div>
+
+        <div class="profile-info__value --grey">
+            <p class="p"><span class="p --color-white">Bio:</span> {{ page_user.bio }}</p>
+        </div>
+        <div class="profile-info__value --green flex-row space-between flex-center-vert">
+            <p class="p --color-green --bold">Handicap</p>
+            <p class="p --color-green --bold">{{ page_user.handicap }}</p>
+        </div>
+        <div class="profile-info__value --yellow flex-row space-between flex-center-vert">
+            <p class="p --color-green --bold">Favorite Course</p>
+            <p class="p --color-green --bold">{{ page_user.favorite_course }}</p>
+        </div>
+    </div>
+    <div class="profile-groups__container">
+    <div class="flex-row space-between flex-center-vert" style="margin-bottom: 20px">
+        <h2>My Groups</h2>
+        <a href="{% url 'group_create' %}">
+            <button>Create Group</button>
+        </a>
+    </div>
+        {% for group in groups %}
+            {% if group.creator.id == user.id %}
+            <div class="group__card">
+                <div class="flex-row flex-center-vert" id="group__info">
+                    <div class="flex-row flex-center-vert">
+                    <a href="{% url 'profile' group.creator.profile.id %}">
+                    {% if group.creator.profile.profile_img %}
+                        <img class="group__profile-img" src="{{ group.creator.profile.profile_img.url }}">
+                    {% else %}
+                        <img class="group__profile-img" src="main_app/media/profile/profile-image-default.jpeg">
+                    {% endif %}
+                    </a>
+                        <div class="flex-column flex-center-vert">
+                            <span class="group__username">{{group.creator.username}}</span>
+                            <span class="group__game-type">{{group.game_type}}</span>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="flex-column flex-center-vert h-full flex-gap-4">
+                            <div class="flex-row ">
+                                <img class="group__img-bullet" src="../static/images/flag__icon.svg">
+                                <span>{{group.golf_course}}</span>
+                            </div>
+                            <div class="flex-row ">
+                                <img class="group__img-bullet" src="../static/images/icon__clock.svg">
+                                <span>{{group.tee_date}} | {{group.tee_time}}</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="group__members-wrap">
+                        {% for member in group.members.all %}
+                        <a href="{% url 'profile' member.profile.id %}">
+                        {% if member.profile.profile_img %}
+                        <img class="group__member" src="{{ member.profile.profile_img.url }}">
+                        {% else %}
+                        <img class="group__member" src="main_app/media/profile/profile-image-default.jpeg">
+                        {% endif %}
+                        </a>
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="flex-row">
+                    {% if user.is_authenticated and group.creator.id == user.id %}
+                        <figure class="elipses__bg">
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                        </figure>
+                    {% endif %}
+                    {% if group.creator.id != user.id %}
+                    <form action="{% url 'member_group' group.pk %}" method="POST">
+                        {% csrf_token %}
+                        {% if user in group.members.all %}
+                            <button type="submit" name="group_id" value="{{ group.id }}" class="group__cta --red-btn">Leave</button>
+                        {% else %}
+                            <button type="submit" name="group_id" value="{{ group.id }}" class="group__cta">Join</button>
+                        {% endif %}
+                    </form>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="update-popup__bg">
+                <div class="update-popup__wrap">
+                    <a href="{% url 'group_delete' group.pk %}">Delete</a>
+                    <div class="divider"></div>
+                    <a href="{% url 'group_update' group.pk %}">Edit</a>
+                    <div class="divider"></div>
+                    <a crud-popup-cancel>Cancel</a>
+                </div>
+            </div>
+
+            {% endif %}
+        {% endfor %}
+    </div>
+</div>
+
 {% endblock %}
